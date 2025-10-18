@@ -3,6 +3,7 @@ const result = document.getElementById("result");
 
 input.addEventListener("input", () => {
   const value = input.value.trim();
+  const num = Number(value);
 
   // Empty input
   if (!value) {
@@ -12,7 +13,7 @@ input.addEventListener("input", () => {
   }
 
   // Invalid input
-  if (Number(value) < 0 || Number.isNaN(Number(value))) {
+  if (num < 0 || Number.isNaN(num)) {
     result.textContent = "Please enter a valid positive number.";
     result.className = "text-danger";
     return;
