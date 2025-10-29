@@ -8,7 +8,6 @@ const escapeForRegex = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const input = document.getElementById("userInput");
 const textEl = document.getElementById("text");
 
-// Keep the pristine original so we can restore it
 const originalHTML = textEl.innerHTML;
 
 /**
@@ -24,10 +23,8 @@ const highlight = (query) => {
     return;
   }
 
-  // \b = word boundary; use 'u' for better unicode handling with punctuation/dash
   const pattern = new RegExp(`\\b${escapeForRegex(q)}\\b`, "giu");
 
-  // Work on the original string each time to avoid nesting <mark> tags
   const highlighted = originalHTML.replace(pattern, (m) => `<mark>${m}</mark>`);
   textEl.innerHTML = highlighted;
 };
