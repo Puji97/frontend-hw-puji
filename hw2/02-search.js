@@ -6,13 +6,11 @@ const highlight = (text, query) => {
   return text.replace(pattern, (m) => `<mark>${m}</mark>`);
 };
 
-// --- DOM
 const form = document.getElementById("searchForm");
 const input = document.getElementById("userInput");
 const results = document.getElementById("results");
 const alertRegion = document.getElementById("alertRegion");
 
-// --- UI helpers
 const showAlert = (type, message) => {
   alertRegion.innerHTML = `<div class="alert alert-${type}" role="status">${message}</div>`;
 };
@@ -52,7 +50,6 @@ const renderResults = (items, query) => {
   results.appendChild(frag);
 };
 
-// --- events
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   const q = input.value.trim();
@@ -67,7 +64,6 @@ form.addEventListener("submit", (e) => {
   renderResults(matches, q);
 });
 
-// Clear results when the field is cleared (nice UX)
 input.addEventListener("input", () => {
   if (input.value.trim() === "") {
     results.replaceChildren();
