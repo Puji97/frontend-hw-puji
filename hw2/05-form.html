@@ -7,14 +7,152 @@
     <title>05 - Form</title>
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        background-color: #1f2429;
+        min-height: 100vh;
+      }
+      main {
+        min-height: 100vh;
+      }
+    </style>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    ></script>
     <script defer src="05-form.js"></script>
   </head>
-  <body>
-    <main>
-      <form>
-        <h1>Exercise 05 - Form</h1>
-      </form>
+  <body class="d-flex align-items-center justify-content-center">
+    <main class="container">
+      <section
+        class="bg-light rounded-3 shadow p-4 p-md-5 mx-auto"
+        style="max-width: 720px"
+      >
+        <form id="regForm" novalidate>
+          <h1 class="text-center mb-4">Exercise 05 - Form</h1>
+
+          <div class="mb-3">
+            <label for="fullName" class="form-label fw-semibold"
+              >Full Name:</label
+            >
+            <input
+              id="fullName"
+              name="fullName"
+              type="text"
+              class="form-control"
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label fw-semibold">Email:</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              class="form-control"
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="status" class="form-label fw-semibold"
+              >Registration Status:</label
+            >
+            <select id="status" name="status" class="form-select">
+              <option value="" selected disabled>Choose an Option</option>
+              <option value="Full-time">Full-time</option>
+              <option value="Part-time">Part-time</option>
+              <option value="Auditing">Auditing</option>
+            </select>
+          </div>
+
+          <fieldset class="mb-3">
+            <legend class="col-form-label fw-semibold fs-6 mb-2">
+              Have you taken any of the following courses?
+            </legend>
+            <div id="coursesContainer"></div>
+          </fieldset>
+
+          <div class="mb-4">
+            <label for="notes" class="form-label fw-semibold"
+              >Anything else?</label
+            >
+            <textarea
+              id="notes"
+              name="notes"
+              rows="3"
+              class="form-control"
+            ></textarea>
+          </div>
+
+          <div class="d-flex gap-3">
+            <button type="submit" class="btn btn-primary flex-fill">
+              Submit
+            </button>
+            <button type="reset" class="btn btn-secondary flex-fill">
+              Reset
+            </button>
+          </div>
+        </form>
+      </section>
     </main>
+
+    <div
+      class="modal fade"
+      id="resultModal"
+      tabindex="-1"
+      aria-hidden="true"
+      aria-labelledby="resultTitle"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 id="resultTitle" class="modal-title">Submitted Data</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <dl class="row mb-0" id="resultList"></dl>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Dynamically generate course checkboxes
+      const courses = [
+        "Programming Languages",
+        "Operating Systems",
+        "Full Stack Web Development",
+      ];
+      const container = document.getElementById("coursesContainer");
+
+      courses.forEach((course, i) => {
+        const id = `course-${i}`;
+        const div = document.createElement("div");
+        div.className = "form-check";
+        div.innerHTML = `
+          <input class="form-check-input" type="checkbox" id="${id}" name="courses" value="${course}">
+          <label class="form-check-label" for="${id}">${course}</label>
+        `;
+        container.appendChild(div);
+      });
+    </script>
   </body>
 </html>
