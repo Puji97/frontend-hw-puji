@@ -73,43 +73,7 @@
             <legend class="col-form-label fw-semibold fs-6 mb-2">
               Have you taken any of the following courses?
             </legend>
-
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="c-prog"
-                name="courses"
-                value="Programming Languages"
-              />
-              <label class="form-check-label" for="c-prog"
-                >Programming Languages</label
-              >
-            </div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="c-os"
-                name="courses"
-                value="Operating Systems"
-              />
-              <label class="form-check-label" for="c-os"
-                >Operating Systems</label
-              >
-            </div>
-            <div class="form-check">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                id="c-fullstack"
-                name="courses"
-                value="Full Stack Web Development"
-              />
-              <label class="form-check-label" for="c-fullstack"
-                >Full Stack Web Development</label
-              >
-            </div>
+            <div id="coursesContainer"></div>
           </fieldset>
 
           <div class="mb-4">
@@ -169,5 +133,26 @@
         </div>
       </div>
     </div>
+
+    <script>
+      // Dynamically generate course checkboxes
+      const courses = [
+        "Programming Languages",
+        "Operating Systems",
+        "Full Stack Web Development",
+      ];
+      const container = document.getElementById("coursesContainer");
+
+      courses.forEach((course, i) => {
+        const id = `course-${i}`;
+        const div = document.createElement("div");
+        div.className = "form-check";
+        div.innerHTML = `
+          <input class="form-check-input" type="checkbox" id="${id}" name="courses" value="${course}">
+          <label class="form-check-label" for="${id}">${course}</label>
+        `;
+        container.appendChild(div);
+      });
+    </script>
   </body>
 </html>
